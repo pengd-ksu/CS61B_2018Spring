@@ -1,0 +1,13 @@
+https://junit.org/junit4/faq.html#started_2
+
+Unix (bash)
+
+To install JUnit on Unix, follow these steps:
+Unzip the junit.zip distribution file to a directory referred to as $JUNIT_HOME.
+Add JUnit to the classpath:
+
+export CLASSPATH=$CLASSPATH:$JUNIT_HOME/junit.jar
+
+HERE $JUNIT_HOME is: /Users/wangpeng/Desktop/KSU/Computer/CS61/CS61B/Spring2018/Code/skeleton-sp18/lab2setup
+
+export CLASSPATH=$CLASSPATH:/Users/wangpeng/Desktop/KSU/Computer/CS61/CS61B/Spring2018/Code/skeleton-sp18/lab2setup/junit.jar
