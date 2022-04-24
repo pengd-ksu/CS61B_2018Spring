@@ -8,13 +8,13 @@ public class LinkedListDeque<T> {
         private Node prev;
         private Node next;
 
-        private Node (T i, Node pprev, Node nnext) {
+        private Node(T i, Node pprev, Node nnext) {
             item = i;
             prev = pprev;
             next = nnext;
         }
         // For initialize snetinel. Because we don't know T type yet.
-        private Node (Node pprev, Node nnext) {
+        private Node(Node pprev, Node nnext) {
             prev = pprev;
             next = nnext;
         }
@@ -37,7 +37,7 @@ public class LinkedListDeque<T> {
     }
 
     public void addLast(T item) {
-        Node node = new Node(sentinel.prev, sentinel);
+        Node node = new Node(item, sentinel.prev, sentinel);
         sentinel.prev.next = node;
         sentinel.prev = node;
         size++;
@@ -75,8 +75,8 @@ public class LinkedListDeque<T> {
             return null;
         }
         T ans = sentinel.prev.item;
-        sentinel.prev = sentinel.prev.prev;
         sentinel.prev.prev.next = sentinel;
+        sentinel.prev = sentinel.prev.prev;
         size--;
         return ans;
     }

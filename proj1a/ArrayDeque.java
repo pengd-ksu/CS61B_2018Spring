@@ -3,7 +3,7 @@
  *  @author PengWang
  */
 public class ArrayDeque<T> {
-	private T[] array;
+    private T[] array;
     private int size;
     private int length;
     private int front;
@@ -21,21 +21,21 @@ public class ArrayDeque<T> {
     // decremented first, then assigned a value; while back will be assigned a value
     // first, then increased; both should be considered with modulo.
     // Double the size and copy all the elements into new array;
-    public int posMinusOne (int index) {
+    private int posMinusOne(int index) {
         if (index == 0) {
             return length - 1;
         }
         return index--;
     }
 
-    public int posPlusOne (int index, int len) {
+    private int posPlusOne(int index, int len) {
         if (index == len - 1) {
             return 0;
         }
         return index++;
     }
 
-    public void grow() {
+    private void grow() {
         T[] copyArray = (T[]) new Object[length * 2];
         int ptr1 = front;
         int ptr2 = length;
@@ -51,7 +51,7 @@ public class ArrayDeque<T> {
     }
 
     // Shrink the size to 1/4 whenever actual elements decrease beyond that;
-    public void shrink() {
+    private void shrink() {
         T[] copyArray = (T[]) new Object [length / 2];
         int ptr1 = front;
         int ptr2 = length / 4;
@@ -80,7 +80,7 @@ public class ArrayDeque<T> {
             grow();
         }
         array[back] = item;
-        back = posPlusOne (back, length);
+        back = posPlusOne(back, length);
         size++;
     }
 
@@ -107,7 +107,7 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         }
-        T ans = array[front];//remember, front is already in use whenever initialized;
+        T ans = array[front]; //remember, front is already in use whenever initialized;
         front = posPlusOne(front, length);
         size--;
         return ans;
