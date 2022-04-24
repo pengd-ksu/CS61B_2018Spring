@@ -25,14 +25,14 @@ public class ArrayDeque<T> {
         if (index == 0) {
             return length - 1;
         }
-        return index--;
+        return index - 1;
     }
 
     private int posPlusOne(int index, int len) {
         if (index == len - 1) {
             return 0;
         }
-        return index++;
+        return index + 1;
     }
 
     private void grow() {
