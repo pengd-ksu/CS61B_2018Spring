@@ -13,7 +13,7 @@ public class Palindrome {
         return isPalindrome(deque);
     }
 
-    public boolean isPalindrome(Deque<Character> dq) {
+    private boolean isPalindrome(Deque<Character> dq) {
         if (dq.size() <= 1) {
             return true;
         }
