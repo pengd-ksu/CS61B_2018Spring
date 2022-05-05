@@ -4,11 +4,14 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
     private WeightedQuickUnionUF uf;
+    // Use another one to connect top, against backwash;
+    private WeightedQuickUnionUF ufFull;
     //private WeightedQuickUnionUF ufTop;
     private boolean[] [] ifOpen;
     private int gridwith;
     private int openSites;
-    private int dummyTop; // For simplification of full and percolation check, connected with every top site
+    // For simplification of full and percolation check, connected with every top site
+    private int dummyTop;
     private int dummyBottom; // connected with every bottom site.
 
     // create N-by-N grid, with all sites initially blocked
@@ -25,8 +28,9 @@ public class Percolation {
         }
         openSites = 0;
         uf = new WeightedQuickUnionUF(N * N + 2);
-        //ufTop =
-        dummyTop = gridwith * gridwith; // WeightedQuickUnionUF has index from 0 to N - 1 (which is N*N + 1 here)
+        ufFull = new WeightedQuickUnionUF(N * N + 1);
+        // WeightedQuickUnionUF has index from 0 to N - 1 (which is N*N + 1 here)
+        dummyTop = gridwith * gridwith;
         dummyBottom = gridwith * gridwith + 1;
     }
 
@@ -55,6 +59,7 @@ public class Percolation {
             } // Shouldn't use inGrid here, because we don't want to be stuck by out of boundaries!ß
             if (isOpen(newRow, newCol)) {
                 uf.union(pos, getPos(newRow, newCol));
+                ufFull.union(pos, getPos(newRow, newCol));
             }
         }
     }
@@ -71,6 +76,7 @@ public class Percolation {
         connectNeighbours(row, col);
         if (row == 0) {
             uf.union(dummyTop, pos);
+            ufFull.union(dummyTop, pos);
         } else if (row == gridwith - 1) {
             uf.union(dummyBottom, pos);
         }
@@ -90,7 +96,7 @@ public class Percolation {
             throw new java.lang.IndexOutOfBoundsException("Not in the grid!");
         }
         int pos = getPos(row, col);
-        return uf.connected(pos, dummyTop);
+        return ufFull.connected(pos, dummyTop);
     }
 
     // number of open sites
@@ -101,5 +107,15 @@ public class Percolation {
     // does the system percolate?
     public boolean percolates() {
         return uf.connected(dummyTop, dummyBottom);
+    }
+
+    public static void main(String[] args) {
+        Percolation perc = new Percolation(3);
+        perc.open(0, 2);
+        perc.open(1, 2);
+        perc.open(2, 2);
+        perc.open(2, 0);
+
+        System.out.println(perc.percolates());
     }
 }
