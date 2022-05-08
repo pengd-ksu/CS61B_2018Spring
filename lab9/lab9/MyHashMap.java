@@ -7,10 +7,11 @@ import java.util.Set;
  *  A hash table-backed Map implementation. Provides amortized constant time
  *  access to elements via get(), remove(), and put() in the best case.
  *
- *  @author Your name here
+ *  @author Peng Wang
  */
 public class MyHashMap<K, V> implements Map61B<K, V> {
 
+    private int sizeFactor = 2;
     private static final int DEFAULT_SIZE = 16;
     private static final double MAX_LF = 0.75;
 
@@ -23,6 +24,11 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
 
     public MyHashMap() {
         buckets = new ArrayMap[DEFAULT_SIZE];
+        this.clear();
+    }
+
+    public MyHashMap(int size) {
+        buckets = new ArrayMap[size];
         this.clear();
     }
 
@@ -53,19 +59,37 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      */
     @Override
     public V get(K key) {
-        throw new UnsupportedOperationException();
+        int hashCode = hash(key);
+        return buckets[hashCode].get(key);
+    }
+
+    private void resize(int newSize) {
+        MyHashMap<K, V> newHashMap = new MyHashMap<>(newSize);
+        for (ArrayMap<K, V> bucket: buckets) {
+            for (K key: bucket) {
+                newHashMap.put(key, bucket.get(key));
+            }
+        }
+        this.buckets = newHashMap.buckets;
     }
 
     /* Associates the specified value with the specified key in this map. */
     @Override
     public void put(K key, V value) {
-        throw new UnsupportedOperationException();
+        if (loadFactor() > MAX_LF) {
+            resize(size * sizeFactor);
+        }
+        int hashCode = hash(key);
+        if (!buckets[hashCode].containsKey(key)) {
+            size++;
+        }
+        buckets[hashCode].put(key, value);
     }
 
     /* Returns the number of key-value mappings in this map. */
     @Override
     public int size() {
-        throw new UnsupportedOperationException();
+        return size;
     }
 
     //////////////// EVERYTHING BELOW THIS LINE IS OPTIONAL ////////////////
