@@ -1,2 +1,9 @@
-package PACKAGE_NAME;public class TestArrayDequeGold {
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class TestArrayDequeGold {
+    @Test
+    public void testStudentArrayDeque() {
+
+    }
 }
