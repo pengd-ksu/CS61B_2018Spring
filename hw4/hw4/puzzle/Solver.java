@@ -20,8 +20,8 @@ public class Solver {
         public int compareTo(Object o) {
             if (o.getClass() == this.getClass()) {
                 SearchNode n = (SearchNode) o;
-                return this.movesSoFar + this.state.estimatedDistanceToGoal() -
-                        n.movesSoFar - n.state.estimatedDistanceToGoal();
+                return this.movesSoFar + this.state.estimatedDistanceToGoal()
+                        - n.movesSoFar - n.state.estimatedDistanceToGoal();
             }
             return -1;
         }

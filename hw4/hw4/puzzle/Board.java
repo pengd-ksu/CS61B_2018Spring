@@ -122,6 +122,18 @@ public class Board implements WorldState {
         return true;
     }
 
+    @Override
+    // equals() comes with hashCode().
+    public int hashCode() {
+        int hash = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                hash = (hash + tiles[i][j]) * 31;
+            }
+        }
+        return hash;
+    }
+
     /** Returns the string representation of the board.
      * Uncomment this method. */
     public String toString() {
