@@ -7,6 +7,9 @@ public class Match {
         this.symbol = symbol;
     }
 
+    public Match(BitSequence sequence, BitSequence querySequence) {
+    }
+
     public Character getSymbol() {
         return this.symbol;
     }
