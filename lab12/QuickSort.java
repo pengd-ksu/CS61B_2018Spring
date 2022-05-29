@@ -61,7 +61,7 @@ public class QuickSort {
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> quickSort(
             Queue<Item> items) {
-        if (items.size() <= 1) {
+        if (items.size() <= 1) {    // Base condition in recursion.
             return items;
         }
         Queue<Item> less = new Queue<>();
