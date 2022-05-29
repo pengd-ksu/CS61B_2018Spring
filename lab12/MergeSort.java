@@ -81,14 +81,14 @@ public class MergeSort {
     }
 
     public static void main(String[] args) {
-        Queue<String> q = new Queue<>();
-        q.enqueue("hello");
-        q.enqueue("darkness");
-        q.enqueue("my");
-        q.enqueue("old");
-        q.enqueue("friend");
-        Queue<String> sortedQueue = MergeSort.mergeSort(q);
-        System.out.println(q);
+        Queue<String> unsorted = new Queue<>();
+        unsorted.enqueue("hello");
+        unsorted.enqueue("darkness");
+        unsorted.enqueue("my");
+        unsorted.enqueue("old");
+        unsorted.enqueue("friend");
+        Queue<String> sortedQueue = MergeSort.mergeSort(unsorted);
+        System.out.println(unsorted);
         System.out.println(sortedQueue);
     }
 }
